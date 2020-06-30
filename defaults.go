@@ -13,11 +13,15 @@ var (
 	strings   map[string]string
 )
 
+var called bool
+
 // SetGlobalDefault register a environment variable global defaul value
 func SetGlobalDefault(l ...e) {
-	if nil != booleans || nil != durations || nil != floats || nil != integers || nil != strings {
+	if called {
 		panic("function `SetGlobalDefault` already called")
 	}
+
+	called = true
 
 	booleans = map[string]bool{}
 	durations = map[string]time.Duration{}
