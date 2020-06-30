@@ -1,6 +1,6 @@
 # Typenv
 
-[![go.dev](https://img.shields.io/static/v1?label=go.dev&message=reference&color=00add8)](https://pkg.go.dev/diegomarangoni.dev/typenv) [![go report](https://goreportcard.com/badge/diegomarangoni.dev/typenv)](https://goreportcard.com/report/diegomarangoni.dev/typenv)
+[![go.dev](https://img.shields.io/static/v1?label=go.dev&message=reference&color=00add8)](https://pkg.go.dev/diegomarangoni.dev/typenv) [![go report](https://goreportcard.com/badge/diegomarangoni.dev/typenv)](https://goreportcard.com/report/diegomarangoni.dev/typenv) [![Coverage Status](https://coveralls.io/repos/github/diegomarangoni/typenv/badge.svg?branch=master)](https://coveralls.io/github/diegomarangoni/typenv?branch=master)
 
 Typenv is a minimalistic environment variables library with types.
 You can simple get a value from environment variables as the type you need.
