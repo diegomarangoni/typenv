@@ -55,7 +55,7 @@ Useful when you use the same environment with same default value several times.
 ```go
 func init() {
 	typenv.SetGlobalDefault(
-		typenv.E(env.Bool, "DEBUG", true),
+		typenv.E(typenv.Bool, "DEBUG", true),
 	)
 }
 
@@ -77,7 +77,7 @@ You still can override the global default value by setting a local default.
 ```go
 func init() {
 	typenv.SetGlobalDefault(
-		typenv.E(env.Bool, "DEBUG", true),
+		typenv.E(typenv.Bool, "DEBUG", true),
 	)
 }
 
