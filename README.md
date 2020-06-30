@@ -90,3 +90,5 @@ if typenv.Bool("DEBUG", false) {
 ```
 
 If environment is **NOT** set, the return value will be `false`, even if global default is telling that is `true`.
+
+<!-- go test -coverprofile coverage.out && go tool cover -html=coverage.out -o coverage.html -->
