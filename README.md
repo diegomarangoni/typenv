@@ -32,6 +32,8 @@ if typenv.Bool("DEBUG") {
 }
 ```
 
+If the environment is **NOT** set, the zero value of the type will return, in this case `false`.
+
 ## With default value
 
 You can fallback to a default value in case the environment variable is not set.
@@ -43,7 +45,7 @@ if typenv.Bool("DEBUG", true) {
 }
 ```
 
-In this example, if the environment `DEBUG` is not set, the default value will be `true`.
+If the environment is **NOT** set, the return value will be `true`.
 
 ## With global default value
 
@@ -56,9 +58,17 @@ func init() {
 		typenv.E(env.Bool, "DEBUG", true),
 	)
 }
+
+...
+
+if typenv.Bool("DEBUG") {
+	// do something
+}
 ```
 
-You must declare this function only once, it will panic if you declare more than once.
+If the environment is **NOT** set, the return value will be `true`.
+
+Be aware, you must declare the `SetGlobalDefault` function only once, it will panic if you declare more than once.
 
 ## Overriding global default value
 
@@ -79,4 +89,4 @@ if typenv.Bool("DEBUG", false) {
 }
 ```
 
-In this case, if environment is **NOT** set, it will **NOT** get inside the if block even if global default is telling that is `true`.
+If environment is **NOT** set, the return value will be `false`, even if global default is telling that is `true`.
