@@ -2,8 +2,7 @@
 
 [![go.dev](https://img.shields.io/static/v1?label=go.dev&message=reference&color=00add8)](https://pkg.go.dev/diegomarangoni.dev/typenv) [![go report](https://goreportcard.com/badge/diegomarangoni.dev/typenv)](https://goreportcard.com/report/diegomarangoni.dev/typenv) [![codecov](https://codecov.io/gh/diegomarangoni/typenv/branch/master/graph/badge.svg)](https://codecov.io/gh/diegomarangoni/typenv)
 
-Typenv is a minimalistic environment variables library with types.
-You can simple get a value from environment variables as the type you need.
+Typenv is a minimalistic, zero dependency, typed environment variables library.
 It does support the following types:
 
 * Bool
@@ -15,6 +14,10 @@ It does support the following types:
 * Int8
 * Int
 * String
+
+# Why typenv?
+
+Handling environment variables in other type than strings or even handling fallback values is not a simple task, typenv makes easy to handle string, boolean, integer, float and time duration environment variables and also allows you to easily set default values for then.
 
 # How to use it
 
