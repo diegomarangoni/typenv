@@ -1,5 +1,7 @@
 # Typenv
 
+[![go.dev](https://img.shields.io/static/v1?label=go.dev&message=reference&color=00add8)](https://pkg.go.dev/diegomarangoni.dev/typenv) [![go report](https://goreportcard.com/badge/diegomarangoni.dev/typenv)](https://goreportcard.com/report/diegomarangoni.dev/typenv)
+
 Typenv is a minimalistic environment variables library with types.
 You can simple get a value from environment variables as the type you need.
 It does support the following types:
@@ -39,7 +41,6 @@ If the environment is **NOT** set, the zero value of the type will return, in th
 You can fallback to a default value in case the environment variable is not set.
 
 ```go
-// if env not set, will be true
 if typenv.Bool("DEBUG", true) {
 	// do something
 }
