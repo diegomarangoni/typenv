@@ -13,22 +13,16 @@ var (
 	strings   map[string]string
 )
 
-var called bool
-
-// SetGlobalDefault register a environment variable global defaul value
-func SetGlobalDefault(l ...e) {
-	if called {
-		panic("function `SetGlobalDefault` already called")
-	}
-
-	called = true
-
+func init() {
 	booleans = map[string]bool{}
 	durations = map[string]time.Duration{}
 	floats = map[string]float64{}
 	integers = map[string]int64{}
 	strings = map[string]string{}
+}
 
+// SetGlobalDefault register a environment variable global defaul value
+func SetGlobalDefault(l ...e) {
 	for _, i := range l {
 		switch reflect.TypeOf(i.fn) {
 		case reflect.TypeOf(Bool):
@@ -43,9 +37,6 @@ func SetGlobalDefault(l ...e) {
 				floats[i.name] = val
 			case float32:
 				floats[i.name] = float64(val)
-
-			default:
-				panic("given global default value must be a valid float type")
 			}
 
 		case reflect.TypeOf(Int64), reflect.TypeOf(Int32), reflect.TypeOf(Int8), reflect.TypeOf(Int):
@@ -58,9 +49,6 @@ func SetGlobalDefault(l ...e) {
 				integers[i.name] = int64(val)
 			case int:
 				integers[i.name] = int64(val)
-
-			default:
-				panic("given global default value must be a valid integer type")
 			}
 
 		case reflect.TypeOf(String):
@@ -75,7 +63,7 @@ type e struct {
 	val  interface{}
 }
 
-// E tests if given environment is registered and returns a `e{}`
+// E returns a instance of `e` struct
 func E(fn interface{}, name string, val interface{}) e {
 	return e{fn: fn, name: name, val: val}
 }

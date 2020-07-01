@@ -72,8 +72,6 @@ if typenv.Bool("DEBUG") {
 
 If the environment is **NOT** set, the return value will be `true`.
 
-Be aware, you must declare the `SetGlobalDefault` function only once, it will panic if you declare more than once.
-
 ## Overriding global default value
 
 You still can override the global default value by setting a local default.
