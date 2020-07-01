@@ -87,7 +87,6 @@ func init() {
 
 ...
 
-// if env not set, will be false
 if typenv.Bool("DEBUG", false) {
 	// do something
 }
