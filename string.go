@@ -6,8 +6,6 @@ import (
 
 // String returns given registered environment variable and mark as used
 func String(name string, defaults ...string) string {
-	use(name)
-
 	val, set := os.LookupEnv(name)
 
 	if !set {

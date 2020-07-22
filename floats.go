@@ -7,8 +7,6 @@ import (
 
 // Float64 returns given registered environment variable and mark as used
 func Float64(name string, defaults ...float64) float64 {
-	use(name)
-
 	val, set := os.LookupEnv(name)
 
 	if !set {

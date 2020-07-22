@@ -7,8 +7,6 @@ import (
 
 // Int64 returns given registered environment variable and mark as used
 func Int64(name string, defaults ...int64) int64 {
-	use(name)
-
 	val, set := os.LookupEnv(name)
 
 	if !set {

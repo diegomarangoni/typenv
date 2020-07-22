@@ -7,8 +7,6 @@ import (
 
 // Duration returns given registered environment variable and mark as used
 func Duration(name string, defaults ...time.Duration) time.Duration {
-	use(name)
-
 	val, set := os.LookupEnv(name)
 
 	if !set && 1 == len(defaults) {

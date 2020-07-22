@@ -8,8 +8,6 @@ import (
 // `true` for those values: y, yes, true, 1;
 // `false` for anything else.
 func Bool(name string, defaults ...bool) bool {
-	use(name)
-
 	val, set := os.LookupEnv(name)
 
 	if !set {
