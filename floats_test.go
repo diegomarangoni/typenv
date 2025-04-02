@@ -5,6 +5,8 @@ import (
 	"testing"
 
 	"diegomarangoni.dev/typenv"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestFloat64(t *testing.T) {
@@ -16,7 +18,7 @@ func TestFloat64(t *testing.T) {
 		var expected float64
 
 		got := typenv.Float64("TEST_FLOAT64_UNSET")
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 
 	t.Run("unset with default", func(t *testing.T) {
@@ -25,43 +27,43 @@ func TestFloat64(t *testing.T) {
 		expected := float64(111.11)
 
 		got := typenv.Float64("TEST_FLOAT64_UNSET_WITH_DEFAULT", 111.11)
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 
 	t.Run("set", func(t *testing.T) {
 		t.Parallel()
 
 		err := os.Setenv("TEST_FLOAT64_SET", "111.11")
-		require_no_error(t, err)
+		require.NoError(t, err)
 
 		expected := float64(111.11)
 
 		got := typenv.Float64("TEST_FLOAT64_SET")
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 
 	t.Run("set with default", func(t *testing.T) {
 		t.Parallel()
 
 		err := os.Setenv("TEST_FLOAT64_SET_WITH_DEFAULT", "111.11")
-		require_no_error(t, err)
+		require.NoError(t, err)
 
 		expected := float64(111.11)
 
 		got := typenv.Float64("TEST_FLOAT64_SET_WITH_DEFAULT", 222.22)
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 
 	t.Run("invalid", func(t *testing.T) {
 		t.Parallel()
 
 		err := os.Setenv("TEST_FLOAT64_INVALID", "-------")
-		require_no_error(t, err)
+		require.NoError(t, err)
 
 		var expected float64
 
 		got := typenv.Float64("TEST_FLOAT64_INVALID")
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 }
 
@@ -74,7 +76,7 @@ func TestFloat32(t *testing.T) {
 		var expected float32
 
 		got := typenv.Float32("TEST_FLOAT32_UNSET")
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 
 	t.Run("unset with default", func(t *testing.T) {
@@ -83,54 +85,54 @@ func TestFloat32(t *testing.T) {
 		expected := float32(111.11)
 
 		got := typenv.Float32("TEST_FLOAT32_UNSET_WITH_DEFAULT", 111.11)
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 
 	t.Run("set", func(t *testing.T) {
 		t.Parallel()
 
 		err := os.Setenv("TEST_FLOAT32_SET", "111.11")
-		require_no_error(t, err)
+		require.NoError(t, err)
 
 		expected := float32(111.11)
 
 		got := typenv.Float32("TEST_FLOAT32_SET")
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 
 	t.Run("set with default", func(t *testing.T) {
 		t.Parallel()
 
 		err := os.Setenv("TEST_FLOAT32_SET_WITH_DEFAULT", "111.11")
-		require_no_error(t, err)
+		require.NoError(t, err)
 
 		expected := float32(111.11)
 
 		got := typenv.Float32("TEST_FLOAT32_SET_WITH_DEFAULT", 222.22)
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 
 	t.Run("invalid", func(t *testing.T) {
 		t.Parallel()
 
 		err := os.Setenv("TEST_FLOAT32_INVALID", "-------")
-		require_no_error(t, err)
+		require.NoError(t, err)
 
 		var expected float32
 
 		got := typenv.Float32("TEST_FLOAT32_INVALID")
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 
 	t.Run("invalid with default", func(t *testing.T) {
 		t.Parallel()
 
 		err := os.Setenv("TEST_FLOAT32_INVALID", "-------")
-		require_no_error(t, err)
+		require.NoError(t, err)
 
 		expected := float32(1.1)
 
 		got := typenv.Float32("TEST_FLOAT32_INVALID", 1.1)
-		assert_equal(t, expected, got)
+		assert.Equal(t, expected, got)
 	})
 }

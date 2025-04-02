@@ -4,53 +4,63 @@ import (
 	"strconv"
 )
 
-// Int64 returns given registered environment variable and mark as used
-func Int64(name string, defaults ...int64) int64 {
-	return parse(name, func(env string) (int64, error) {
-		return strconv.ParseInt(env, 10, 64)
-	}, defaults...)
+// Int64 returns given environment variable as int64
+func Int64(name string, fallback ...int64) int64 {
+	return parse(name, formatInt64, fallback)
 }
 
-// Int32 returns given registered environment variable and mark as used
-func Int32(name string, defaults ...int32) int32 {
-	return parse(name, func(env string) (int32, error) {
-		val, err := strconv.ParseInt(env, 10, 36)
-		if err != nil {
-			return 0, err
-		}
-		return int32(val), nil
-	}, defaults...)
+func formatInt64(raw string) (int64, error) {
+	return strconv.ParseInt(raw, 10, 64)
 }
 
-// Int16 returns given registered environment variable and mark as used
-func Int16(name string, defaults ...int16) int16 {
-	return parse(name, func(env string) (int16, error) {
-		val, err := strconv.ParseInt(env, 10, 36)
-		if err != nil {
-			return 0, err
-		}
-		return int16(val), nil
-	}, defaults...)
+// Int32 returns given environment variable as int32
+func Int32(name string, fallback ...int32) int32 {
+	return parse(name, formatInt32, fallback)
 }
 
-// Int8 returns given registered environment variable and mark as used
-func Int8(name string, defaults ...int8) int8 {
-	return parse(name, func(env string) (int8, error) {
-		val, err := strconv.ParseInt(env, 10, 36)
-		if err != nil {
-			return 0, err
-		}
-		return int8(val), nil
-	}, defaults...)
+func formatInt32(raw string) (int32, error) {
+	val, err := strconv.ParseInt(raw, 10, 36)
+	if err != nil {
+		return 0, err
+	}
+	return int32(val), nil
 }
 
-// Int returns given registered environment variable and mark as used
-func Int(name string, defaults ...int) int {
-	return parse(name, func(env string) (int, error) {
-		val, err := strconv.ParseInt(env, 10, 36)
-		if err != nil {
-			return 0, err
-		}
-		return int(val), nil
-	}, defaults...)
+// Int16 returns given environment variable as int16
+func Int16(name string, fallback ...int16) int16 {
+	return parse(name, formatInt16, fallback)
+}
+
+func formatInt16(raw string) (int16, error) {
+	val, err := strconv.ParseInt(raw, 10, 36)
+	if err != nil {
+		return 0, err
+	}
+	return int16(val), nil
+}
+
+// Int8 returns given environment variable as int8
+func Int8(name string, fallback ...int8) int8 {
+	return parse(name, formatInt8, fallback)
+}
+
+func formatInt8(raw string) (int8, error) {
+	val, err := strconv.ParseInt(raw, 10, 36)
+	if err != nil {
+		return 0, err
+	}
+	return int8(val), nil
+}
+
+// Int returns given environment variable as int
+func Int(name string, fallback ...int) int {
+	return parse(name, formatInt, fallback)
+}
+
+func formatInt(raw string) (int, error) {
+	val, err := strconv.ParseInt(raw, 10, 36)
+	if err != nil {
+		return 0, err
+	}
+	return int(val), nil
 }

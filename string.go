@@ -1,8 +1,8 @@
 package typenv
 
-// String returns given registered environment variable and mark as used
-func String(name string, defaults ...string) string {
-	return parse(name, func(env string) (string, error) {
-		return env, nil
-	}, defaults...)
+// String returns given environment variable as string
+func String(name string, fallback ...string) string {
+	return parse(name, func(raw string) (string, error) {
+		return raw, nil
+	}, fallback)
 }
