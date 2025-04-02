@@ -9,23 +9,47 @@ import (
 )
 
 func TestDuration(t *testing.T) {
-	var expected, got time.Duration
+	t.Parallel()
 
-	got = typenv.Duration("TEST_DURATION")
-	if got != expected {
-		t.Errorf("Duration failed, expected `%v` but got `%v`.", expected, got)
-	}
+	t.Run("unset", func(t *testing.T) {
+		t.Parallel()
 
-	expected = 5 * time.Second
-	got = typenv.Duration("TEST_DURATION", 5*time.Second)
-	if got != expected {
-		t.Errorf("Duration failed, expected `%v` but got `%v`.", expected, got)
-	}
+		var expected time.Duration
 
-	os.Setenv("TEST_DURATION", "10h")
-	expected = 10 * time.Hour
-	got = typenv.Duration("TEST_DURATION", 10*time.Hour)
-	if got != expected {
-		t.Errorf("Duration failed, expected `%v` but got `%v`.", expected, got)
-	}
+		got := typenv.Duration("TEST_DURATION_UNSET")
+		assert_equal(t, expected, got)
+	})
+
+	t.Run("unset with default", func(t *testing.T) {
+		t.Parallel()
+
+		expected := 3 * time.Hour
+
+		got := typenv.Duration("TEST_DURATION_UNSET_WITH_DEFAULT", expected)
+		assert_equal(t, expected, got)
+	})
+
+	t.Run("set", func(t *testing.T) {
+		t.Parallel()
+
+		err := os.Setenv("TEST_DURATION_SET", "3h")
+		require_no_error(t, err)
+
+		expected := 3 * time.Hour
+
+		got := typenv.Duration("TEST_DURATION_SET")
+		assert_equal(t, expected, got)
+	})
+
+	t.Run("set with default", func(t *testing.T) {
+		t.Parallel()
+
+		err := os.Setenv("TEST_DURATION_SET_WITH_DEFAULT", "3h")
+		require_no_error(t, err)
+
+		expected := 3 * time.Hour
+
+		got := typenv.Duration("TEST_DURATION_SET_WITH_DEFAULT", 10*time.Minute)
+		assert_equal(t, expected, got)
+	})
 }

@@ -1,30 +1,20 @@
 package typenv
 
 import (
-	"os"
+	"strings"
 )
 
 // Bool returns given registered environment variable and mark as used.
 // `true` for those values: y, yes, true, 1;
 // `false` for anything else.
 func Bool(name string, defaults ...bool) bool {
-	val, set := os.LookupEnv(name)
+	return parse(name, func(env string) (bool, error) {
+		switch strings.ToLower(env) {
+		case "y", "yes", "true", "1":
+			return true, nil
 
-	if !set {
-		if 1 == len(defaults) {
-			return defaults[0]
+		default:
+			return false, nil
 		}
-
-		if global, ok := booleans[name]; ok {
-			return global
-		}
-	}
-
-	switch val {
-	case "y", "yes", "true", "1":
-		return true
-
-	default:
-		return false
-	}
+	}, defaults...)
 }

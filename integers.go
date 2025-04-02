@@ -1,74 +1,56 @@
 package typenv
 
 import (
-	"os"
 	"strconv"
 )
 
 // Int64 returns given registered environment variable and mark as used
 func Int64(name string, defaults ...int64) int64 {
-	val, set := os.LookupEnv(name)
-
-	if !set {
-		if 1 == len(defaults) {
-			return defaults[0]
-		}
-
-		if global, ok := integers[name]; ok {
-			return global
-		}
-	}
-
-	i64, err := strconv.ParseInt(val, 10, 0)
-
-	if nil != err {
-		if 1 == len(defaults) {
-			return defaults[0]
-		}
-
-		if global, ok := integers[name]; ok {
-			return global
-		}
-	}
-
-	return i64
+	return parse(name, func(env string) (int64, error) {
+		return strconv.ParseInt(env, 10, 64)
+	}, defaults...)
 }
 
 // Int32 returns given registered environment variable and mark as used
 func Int32(name string, defaults ...int32) int32 {
-	var subdefaults []int64
+	return parse(name, func(env string) (int32, error) {
+		val, err := strconv.ParseInt(env, 10, 36)
+		if err != nil {
+			return 0, err
+		}
+		return int32(val), nil
+	}, defaults...)
+}
 
-	if 1 == len(defaults) {
-		subdefaults = []int64{int64(defaults[0])}
-	}
-
-	i64 := Int64(name, subdefaults...)
-
-	return int32(i64)
+// Int16 returns given registered environment variable and mark as used
+func Int16(name string, defaults ...int16) int16 {
+	return parse(name, func(env string) (int16, error) {
+		val, err := strconv.ParseInt(env, 10, 36)
+		if err != nil {
+			return 0, err
+		}
+		return int16(val), nil
+	}, defaults...)
 }
 
 // Int8 returns given registered environment variable and mark as used
 func Int8(name string, defaults ...int8) int8 {
-	var subdefaults []int64
-
-	if 1 == len(defaults) {
-		subdefaults = []int64{int64(defaults[0])}
-	}
-
-	i64 := Int64(name, subdefaults...)
-
-	return int8(i64)
+	return parse(name, func(env string) (int8, error) {
+		val, err := strconv.ParseInt(env, 10, 36)
+		if err != nil {
+			return 0, err
+		}
+		return int8(val), nil
+	}, defaults...)
 }
 
 // Int returns given registered environment variable and mark as used
 func Int(name string, defaults ...int) int {
-	var subdefaults []int64
-
-	if 1 == len(defaults) {
-		subdefaults = []int64{int64(defaults[0])}
-	}
-
-	i64 := Int64(name, subdefaults...)
-
-	return int(i64)
+	return parse(name, func(env string) (int, error) {
+		val, err := strconv.ParseInt(env, 10, 36)
+		if err != nil {
+			return 0, err
+		}
+		return int(val), nil
+	}, defaults...)
 }
