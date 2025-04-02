@@ -39,13 +39,10 @@ var _ []bool = typenv.Slice[[]bool]("MY_ENV", ",")
 
 # Why `typenv`?
 
-Handling environment variables with types other than strings can be cumbersome.
-`typenv` simplifies this process by:
-
-- ✅ Eliminating manual type conversions
-- ✅ Supporting slices out of the box
-- ✅ Allowing fallback values for missing environment variables
-- ✅ Having zero external dependencies
+- ✅ Eliminates manual type conversions
+- ✅ Support slices out of the box
+- ✅ Allows fallback value for missing environment variables
+- ✅ Zero external dependencies
 
 # How to use it
 
