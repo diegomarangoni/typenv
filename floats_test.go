@@ -121,4 +121,16 @@ func TestFloat32(t *testing.T) {
 		got := typenv.Float32("TEST_FLOAT32_INVALID")
 		assert_equal(t, expected, got)
 	})
+
+	t.Run("invalid with default", func(t *testing.T) {
+		t.Parallel()
+
+		err := os.Setenv("TEST_FLOAT32_INVALID", "-------")
+		require_no_error(t, err)
+
+		expected := float32(1.1)
+
+		got := typenv.Float32("TEST_FLOAT32_INVALID", 1.1)
+		assert_equal(t, expected, got)
+	})
 }

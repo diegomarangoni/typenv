@@ -24,6 +24,9 @@ func parse[T types](name string, read func(env string) (T, error), defaults ...T
 	val, err := read(raw)
 	if err != nil {
 		log.Printf(`unable to read environment variable "%s" as type "%T": %s`, name, zero, err)
+		if len(defaults) > 0 {
+			return defaults[0]
+		}
 		return zero
 	}
 
